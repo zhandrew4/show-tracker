@@ -1,7 +1,7 @@
 class ShowList {
   String name;
   int length = 0;
-  var list = <Show>[];
+  var shows = <Show>[];
 
   ShowList({required this.name});
 }
