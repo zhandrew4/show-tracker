@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:show_tracker/new_list_screen.dart';
+import 'package:show_tracker/view_list_screen.dart';
 import 'list_items.dart';
 
 class ListMenuScreen extends StatefulWidget {
@@ -51,7 +52,15 @@ class _ListMenuScreenState extends State<ListMenuScreen> {
                   }
                 ),
               ],
-            )
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ViewListScreen(list: _lists[i]),
+                ),
+              );
+            },
           );
         }
       )

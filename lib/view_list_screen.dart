@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'list_items.dart';
 
-class ShowListScreen extends StatefulWidget {
-  const ShowListScreen({Key? key, required this.title}) : super(key: key);
+class ViewListScreen extends StatefulWidget {
+  const ViewListScreen({Key? key, required this.list}) : super(key: key);
 
-  final String title;
+  final ShowList list;
 
   @override
-  State<ShowListScreen> createState() => _ShowListPageState();
+  State<ViewListScreen> createState() => _ViewListScreenState();
 }
 
-class _ShowListPageState extends State<ShowListScreen> {  
+class _ViewListScreenState extends State<ViewListScreen> {  
   @override 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.list.name),
       ), 
     );
   }
