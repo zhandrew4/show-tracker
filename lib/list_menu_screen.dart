@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:show_tracker/new_list_screen.dart';
 import 'list_items.dart';
 
-class ListMenu extends StatefulWidget {
-  const ListMenu({Key? key, required this.title}) : super(key: key);
+class ListMenuScreen extends StatefulWidget {
+  const ListMenuScreen({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  State<ListMenu> createState() => _ListMenuState();
+  State<ListMenuScreen> createState() => _ListMenuScreenState();
 }
 
-class _ListMenuState extends State<ListMenu> {
+class _ListMenuScreenState extends State<ListMenuScreen> {
 
   final _lists = <ShowList>[];
 
@@ -60,7 +61,7 @@ class _ListMenuState extends State<ListMenu> {
   Future<void> _navigateAndAddList(BuildContext context) async {
     final newList = await Navigator.push(
       context, 
-      MaterialPageRoute(builder: (context) => const NewListPage(title: "New List"))
+      MaterialPageRoute(builder: (context) => const NewListScreen(title: "New List"))
     );
 
     if (!mounted) return;
