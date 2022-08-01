@@ -16,7 +16,22 @@ class _ViewListScreenState extends State<ViewListScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.list.name),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: null, 
+            tooltip: "Add Show",
+            ),
+        ],
       ), 
+      body: ListView.builder(
+        itemCount: widget.list.length,
+        itemBuilder: (context, i) {
+          return ListTile(
+            title: Text(widget.list.shows[i].name),
+          );
+        }
+      )
     );
   }
 }
