@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'list_items.dart';
 
 import 'new_show_screen.dart';
+import 'view_show_screen.dart';
 
 class ViewListScreen extends StatefulWidget {
   const ViewListScreen({Key? key, required this.showList}) : super(key: key);
@@ -42,6 +43,14 @@ class _ViewListScreenState extends State<ViewListScreen> {
               },
               tooltip: "Delete Show",
             ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ViewShowScreen(show: widget.showList.shows[i]),
+                ),
+              ).then((value) => setState(() => {}));
+            },
           );
         }
       )
