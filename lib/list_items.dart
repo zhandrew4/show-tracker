@@ -9,7 +9,12 @@ class ShowList {
 
   void addShow(Show newShow) {
     shows.add(newShow);
-    length ++;
+    length++;
+  }
+
+  void removeShow(int index) {
+    shows.removeAt(index);
+    length--;
   }
 }
 

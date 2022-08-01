@@ -49,7 +49,8 @@ class _ListMenuScreenState extends State<ListMenuScreen> {
                     setState(() {
                       _lists.remove(_lists[i]);
                     });
-                  }
+                  },
+                  tooltip: 'Delete List',
                 ),
               ],
             ),

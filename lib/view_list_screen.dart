@@ -33,6 +33,15 @@ class _ViewListScreenState extends State<ViewListScreen> {
         itemBuilder: (context, i) {
           return ListTile(
             title: Text(widget.showList.shows[i].name),
+            trailing: IconButton(
+              icon: const Icon(Icons.delete),
+              onPressed: () {
+                setState(() {
+                  widget.showList.removeShow(i);
+                });
+              },
+              tooltip: "Delete Show",
+            ),
           );
         }
       )
