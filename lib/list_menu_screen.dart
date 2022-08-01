@@ -57,9 +57,9 @@ class _ListMenuScreenState extends State<ListMenuScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ViewListScreen(list: _lists[i]),
+                  builder: (context) => ViewListScreen(showList: _lists[i]),
                 ),
-              );
+              ).then((value) => setState(() => {}));
             },
           );
         }

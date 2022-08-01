@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'list_items.dart';
 
-class ViewListScreen extends StatefulWidget {
-  const ViewListScreen({Key? key, required this.list}) : super(key: key);
+import 'new_show_screen.dart';
 
-  final ShowList list;
+class ViewListScreen extends StatefulWidget {
+  const ViewListScreen({Key? key, required this.showList}) : super(key: key);
+
+  final ShowList showList;
 
   @override
   State<ViewListScreen> createState() => _ViewListScreenState();
@@ -15,8 +17,40 @@ class _ViewListScreenState extends State<ViewListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.list.name),
+        title: Text(widget.showList.name),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              _navigateAndAddShow(context);
+            },
+            tooltip: "Add Show",
+          ),
+        ],
       ), 
+      body: ListView.builder(
+        itemCount: widget.showList.length,
+        itemBuilder: (context, i) {
+          return ListTile(
+            title: Text(widget.showList.shows[i].name),
+          );
+        }
+      )
     );
+  }
+
+  Future<void> _navigateAndAddShow(BuildContext context) async {
+    final newShow = await Navigator.push(
+      context, 
+      MaterialPageRoute(builder: (context) => const NewShowScreen(title: "Add Show"))
+    );
+
+    if (!mounted) return;
+
+    if(newShow != null) {
+      setState(() {
+        widget.showList.addShow(newShow);
+      });
+    }
   }
 }
