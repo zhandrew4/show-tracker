@@ -20,9 +20,9 @@ class ShowList {
 
 class Show {
   String name;
-  late int score;
-  late String comments;
-  late bool watched = false;
+  int? score;
+  String? comments;
+  bool watched = false;
   
   Show({required this.name});
 }

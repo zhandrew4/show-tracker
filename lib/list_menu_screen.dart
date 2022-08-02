@@ -35,7 +35,10 @@ class _ListMenuScreenState extends State<ListMenuScreen> {
         itemCount: _lists.length,
         itemBuilder: (context, i) {
           return ListTile(
-            title: Text(_lists[i].name),
+            title: Text(
+              _lists[i].name,
+              overflow: TextOverflow.fade,
+            ),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [

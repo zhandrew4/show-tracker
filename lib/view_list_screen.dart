@@ -18,7 +18,10 @@ class _ViewListScreenState extends State<ViewListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.showList.name),
+        title: Text(
+          widget.showList.name,
+          overflow: TextOverflow.fade,
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.add),
