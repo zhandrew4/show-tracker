@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'list_menu_screen.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
+  await Hive.openBox("show_tracker_app");
+  
   runApp(
     MaterialApp(
       title: 'Show Tracker',

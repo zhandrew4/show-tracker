@@ -1,28 +1,69 @@
 class ShowList {
-  String name;
-  late int length;
-  var shows = <Show>[];
+  late String name;
+  late List shows;
 
   ShowList({required this.name}) {
-    length = 0;
+    shows = <Show>[];
   }
 
-  void addShow(Show newShow) {
-    shows.add(newShow);
-    length++;
+  ShowList.fromMap(Map m) {
+    name = m["name"];
+    shows = m["shows"].map((show) {
+      return Show.fromMap(show);
+    }).toList();
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      "name": name,
+      "shows": shows.map((show) {
+        return show.toMap();
+      }).toList(),
+    };
+  }
+
+  void addShow(Show show) {
+    shows.add(show);
   }
 
   void removeShow(int index) {
     shows.removeAt(index);
-    length--;
+  }
+
+  @override
+  String toString() {
+    return "ShowList:{name: $name, shows: $shows}";
   }
 }
 
 class Show {
-  String name;
+  late String name;
   int? score;
   String? comments;
-  bool watched = false;
+  late bool watched;
   
-  Show({required this.name});
+  Show({required this.name}) {
+    watched = false;
+  }
+
+  Show.fromMap(Map m) {
+    name = m["name"];
+    score = m["score"];
+    comments = m["comments"];
+    watched = m["watched"];
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      "name": name,
+      "int": score,
+      "comments": comments,
+      "watched": watched,
+    };
+  }
+
+  @override
+  String toString() {
+    return "Show{name: $name}";
+  }
 }
