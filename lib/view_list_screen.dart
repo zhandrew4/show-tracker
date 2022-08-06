@@ -33,7 +33,7 @@ class _ViewListScreenState extends State<ViewListScreen> {
         ],
       ), 
       body: ListView.builder(
-        itemCount: widget.showList.length,
+        itemCount: widget.showList.shows.length,
         itemBuilder: (context, i) {
           return ListTile(
             title: Text(widget.showList.shows[i].name),

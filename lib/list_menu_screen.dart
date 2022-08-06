@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:show_tracker/new_list_screen.dart';
 import 'package:show_tracker/view_list_screen.dart';
+
+import 'package:hive_flutter/hive_flutter.dart';
+
 import 'list_items.dart';
 
 class ListMenuScreen extends StatefulWidget {
@@ -14,7 +17,15 @@ class ListMenuScreen extends StatefulWidget {
 
 class _ListMenuScreenState extends State<ListMenuScreen> {
 
+  var box = Hive.box("show_tracker_app");
+
   final _lists = <ShowList>[];
+
+  @override
+  void initState() {
+    super.initState();
+    getLists();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +49,12 @@ class _ListMenuScreenState extends State<ListMenuScreen> {
             title: Text(
               _lists[i].name,
               overflow: TextOverflow.fade,
+              
             ),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text("${_lists[i].length} Shows"),
+                Text("${_lists[i].shows.length} Shows"),
                 const SizedBox(
                   width: 25,
                 ),
@@ -63,7 +75,10 @@ class _ListMenuScreenState extends State<ListMenuScreen> {
                 MaterialPageRoute(
                   builder: (context) => ViewListScreen(showList: _lists[i]),
                 ),
-              ).then((value) => setState(() => {}));
+              ).then((value) {
+                setState(() => {});
+                updateLists();
+              });
             },
           );
         }
@@ -81,8 +96,28 @@ class _ListMenuScreenState extends State<ListMenuScreen> {
 
     if(newList != null) {
       setState(() {
-        _lists.add(newList);
+        addList(newList);
       });
     }
   }
+
+  getLists() {
+    for (String key in box.keys) {
+      _lists.add(ShowList.fromMap(box.get(key)));
+    }
+  }
+
+  addList(ShowList newList) {
+    setState(() {
+      _lists.add(newList);
+    });
+    box.put(newList.name, newList.toMap());
+  }
+
+  updateLists() {
+    for (ShowList list in _lists) {
+      box.put(list.name, list.toMap());
+    }
+  }
+  
 }
