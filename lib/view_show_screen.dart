@@ -38,9 +38,19 @@ class _ViewShowScreenState extends State<ViewShowScreen> {
       body: ListView(
         padding: const EdgeInsets.all(10),
         children: [
-          Text(
-            widget.show.watched ? "Watched" : "Unwatched",
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+          RichText(
+            text: TextSpan(
+              text: "Status: ",
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+              children: [
+                TextSpan(
+                  text: widget.show.watched ? "Watched" : "Unwatched",
+                  style: Theme.of(context).textTheme.titleMedium,
+                )
+              ],
+            ),
+            textAlign: TextAlign.left,
+            overflow: TextOverflow.fade,
           ),
           Divider(
             height: 30,

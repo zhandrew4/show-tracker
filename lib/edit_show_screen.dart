@@ -32,6 +32,7 @@ class _EditShowScreenState extends State<EditShowScreen> {
       body: ListView(
         padding: const EdgeInsets.all(10),
         children: [
+          // Status Toggle Button (Watched/Unwatched)
           Row(
             children: [
               Text(
@@ -90,6 +91,9 @@ class _EditShowScreenState extends State<EditShowScreen> {
               ),
             ],
           ),
+
+          // Score Selector
+          
         ],
       ),
     );
