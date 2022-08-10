@@ -14,10 +14,13 @@ class _EditShowScreenState extends State<EditShowScreen> {
 
   late List<bool> isSelectedWatched;
 
+  final _commentsTextController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
     isSelectedWatched = <bool>[widget.show.watched, !widget.show.watched];
+    _commentsTextController.text = widget.show.comments ?? "None";
   }
 
   @override
@@ -109,7 +112,7 @@ class _EditShowScreenState extends State<EditShowScreen> {
               DropdownButton<String>(
                 value: widget.show.score == null ? "None" : "${widget.show.score}",
                 icon: const Icon(Icons.arrow_drop_down),
-                elevation: 0,
+                alignment: Alignment.centerLeft,
                 style: Theme.of(context).textTheme.bodyMedium,
                 onChanged: !widget.show.watched ? null : (String? newValue) {
                   setState(() {
@@ -128,6 +131,51 @@ class _EditShowScreenState extends State<EditShowScreen> {
                   }).toList(),
               ),
             ],
+          ),
+          Divider(
+            height: 30,
+            thickness: 2,
+            color: Colors.grey.shade400,
+          ),
+
+          // Comments Editor
+          Text(
+            "Comments: ",
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 10),
+          TextField(
+            autocorrect: true,
+            controller: _commentsTextController,
+            minLines: 1,
+            maxLines: null,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+            ),
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+          const SizedBox(height: 10),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: OutlinedButton(
+              style: ButtonStyle(
+                alignment: Alignment.center,
+                fixedSize: MaterialStateProperty.resolveWith<Size?>((Set<MaterialState> states) => const Size(125, 40))
+              ),
+              onPressed: () {
+                setState(() {
+                  if (_commentsTextController.value.text.trim() == "") {
+                    widget.show.comments = null;
+                  } else {
+                    widget.show.comments = _commentsTextController.value.text.trim();
+                  }
+                });
+              }, 
+              child: Text(
+                "Save", 
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+              ),
+            ),
           ),
         ],
       ),

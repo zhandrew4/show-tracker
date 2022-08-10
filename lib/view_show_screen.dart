@@ -80,7 +80,7 @@ class _ViewShowScreenState extends State<ViewShowScreen> {
             "Comments:",
             style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 5),
+          const SizedBox(height: 10),
           Text(
             widget.show.comments ?? "None",
             style: Theme.of(context).textTheme.bodyMedium,
