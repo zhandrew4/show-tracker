@@ -56,7 +56,7 @@ class Show {
   Map<String, dynamic> toMap() {
     return {
       "name": name,
-      "int": score,
+      "score": score,
       "comments": comments,
       "watched": watched,
     };
@@ -64,6 +64,6 @@ class Show {
 
   @override
   String toString() {
-    return "Show{name: $name}";
+    return "Show{name: $name, score: $score, watched: $watched, comments: $comments}";
   }
 }

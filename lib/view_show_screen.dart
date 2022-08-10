@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'list_items.dart';
+import 'edit_show_screen.dart';
 
 class ViewShowScreen extends StatefulWidget {
   const ViewShowScreen({Key? key, required this.show}) : super(key: key);
@@ -19,13 +20,37 @@ class _ViewShowScreenState extends State<ViewShowScreen> {
           widget.show.name,
           overflow: TextOverflow.fade,
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.edit),
+            onPressed: () {
+              Navigator.push(
+                context, 
+                MaterialPageRoute(
+                  builder: (context) => EditShowScreen(show: widget.show),
+                ),
+              ).then((value) => setState(() => {}));
+            },
+            tooltip: "Edit",
+          )
+        ]
       ), 
       body: ListView(
         padding: const EdgeInsets.all(10),
         children: [
-          Text(
-            widget.show.watched ? "Watched" : "Unwatched",
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+          RichText(
+            text: TextSpan(
+              text: "Status: ",
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+              children: [
+                TextSpan(
+                  text: widget.show.watched ? "Watched" : "Unwatched",
+                  style: Theme.of(context).textTheme.titleMedium,
+                )
+              ],
+            ),
+            textAlign: TextAlign.left,
+            overflow: TextOverflow.fade,
           ),
           Divider(
             height: 30,
@@ -38,7 +63,7 @@ class _ViewShowScreenState extends State<ViewShowScreen> {
               style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
               children: [
                 TextSpan(
-                  text: widget.show.score != null ? "${widget.show.score}/10" : "No Score",
+                  text: widget.show.score != null ? "${widget.show.score}/5" : "No Score",
                   style: Theme.of(context).textTheme.titleMedium,
                 )
               ],
@@ -55,7 +80,7 @@ class _ViewShowScreenState extends State<ViewShowScreen> {
             "Comments:",
             style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 5),
+          const SizedBox(height: 10),
           Text(
             widget.show.comments ?? "None",
             style: Theme.of(context).textTheme.bodyMedium,
