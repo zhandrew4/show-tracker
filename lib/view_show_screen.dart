@@ -63,7 +63,7 @@ class _ViewShowScreenState extends State<ViewShowScreen> {
               style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
               children: [
                 TextSpan(
-                  text: widget.show.score != null ? "${widget.show.score}/10" : "No Score",
+                  text: widget.show.score != null ? "${widget.show.score}/5" : "No Score",
                   style: Theme.of(context).textTheme.titleMedium,
                 )
               ],

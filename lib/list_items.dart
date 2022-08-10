@@ -56,7 +56,7 @@ class Show {
   Map<String, dynamic> toMap() {
     return {
       "name": name,
-      "int": score,
+      "score": score,
       "comments": comments,
       "watched": watched,
     };

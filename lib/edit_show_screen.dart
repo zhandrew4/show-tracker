@@ -56,6 +56,9 @@ class _EditShowScreenState extends State<EditShowScreen> {
                       }
                     }
                     widget.show.watched = isSelectedWatched[0];
+                    if (!widget.show.watched) {
+                      widget.show.score = null;
+                    }
                   });
                 },
                 children: [
@@ -65,9 +68,8 @@ class _EditShowScreenState extends State<EditShowScreen> {
                       alignment: Alignment.center,
                       child: Text(
                         "Watched",
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           fontWeight: FontWeight.bold, 
-                          fontSize: 18,
                           color: isSelectedWatched[0] ? Colors.green : null,
                         ),
                       ),
@@ -79,9 +81,8 @@ class _EditShowScreenState extends State<EditShowScreen> {
                       alignment: Alignment.center,
                       child: Text(
                         "Unwatched",
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           fontWeight: FontWeight.bold,
-                          fontSize: 18,
                           color: isSelectedWatched[1] ? Colors.red : null,
                         ),
                       ),
@@ -91,9 +92,43 @@ class _EditShowScreenState extends State<EditShowScreen> {
               ),
             ],
           ),
+          Divider(
+            height: 30,
+            thickness: 2,
+            color: Colors.grey.shade400,
+          ),
 
           // Score Selector
-          
+          Row(
+            children: [
+              Text(
+                "Score: ",
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(width: 10),
+              DropdownButton<String>(
+                value: widget.show.score == null ? "None" : "${widget.show.score}",
+                icon: const Icon(Icons.arrow_drop_down),
+                elevation: 0,
+                style: Theme.of(context).textTheme.bodyMedium,
+                onChanged: !widget.show.watched ? null : (String? newValue) {
+                  setState(() {
+                    if (newValue == "None") {
+                      widget.show.score = null;
+                    } else {
+                      widget.show.score = int.parse(newValue!);
+                    }
+                  });
+                },
+                items: <String>["None", "1", "2", "3", "4", "5"].map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+              ),
+            ],
+          ),
         ],
       ),
     );
