@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'list_items.dart';
+import 'edit_show_screen.dart';
 
 class ViewShowScreen extends StatefulWidget {
   const ViewShowScreen({Key? key, required this.show}) : super(key: key);
@@ -19,6 +20,20 @@ class _ViewShowScreenState extends State<ViewShowScreen> {
           widget.show.name,
           overflow: TextOverflow.fade,
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.edit),
+            onPressed: () {
+              Navigator.push(
+                context, 
+                MaterialPageRoute(
+                  builder: (context) => EditShowScreen(show: widget.show),
+                ),
+              ).then((value) => setState(() => {}));
+            },
+            tooltip: "Edit",
+          )
+        ]
       ), 
       body: ListView(
         padding: const EdgeInsets.all(10),

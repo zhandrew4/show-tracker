@@ -64,6 +64,6 @@ class Show {
 
   @override
   String toString() {
-    return "Show{name: $name}";
+    return "Show{name: $name, score: $score, watched: $watched, comments: $comments}";
   }
 }
