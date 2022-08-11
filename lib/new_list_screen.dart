@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'list_items.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
+import 'show.dart';
+import 'show_list.dart';
 
 class NewListScreen extends StatefulWidget {
-  const NewListScreen({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  const NewListScreen({Key? key}) : super(key: key);
 
   @override 
   State<NewListScreen> createState() => _NewListScreenState();
@@ -13,11 +14,14 @@ class NewListScreen extends StatefulWidget {
 class _NewListScreenState extends State<NewListScreen> {
   final _listNameTextController = TextEditingController();
 
+  var listBox = Hive.box<ShowList>("show_lists");
+  var showBox = Hive.box<Show>("shows");
+
   @override 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text("New List"),
       ),
       body: Form(
         child: Column(
@@ -32,7 +36,10 @@ class _NewListScreenState extends State<NewListScreen> {
             TextButton(
               child: const Text('Create'),
               onPressed: () {
-                Navigator.pop(context, ShowList(name: _listNameTextController.value.text));
+                ShowList newList = ShowList(name: _listNameTextController.value.text);
+                newList.shows = HiveList(showBox);
+                listBox.add(newList);
+                Navigator.pop(context);
               }
             ),
           ],

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'list_items.dart';
+import 'show.dart';
+import 'show_list.dart';
 
 class NewShowScreen extends StatefulWidget {
-  const NewShowScreen({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  const NewShowScreen({Key? key}) : super(key: key);
 
   @override 
   State<NewShowScreen> createState() => _NewShowScreenState();
@@ -17,7 +16,7 @@ class _NewShowScreenState extends State<NewShowScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text("Add Show"),
       ),
       body: Form(
         child: Column(

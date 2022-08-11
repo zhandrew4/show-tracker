@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'list_items.dart';
+import 'show.dart';
 
 class EditShowScreen extends StatefulWidget {
   const EditShowScreen({Key? key, required this.show}) : super(key: key);
@@ -169,6 +169,7 @@ class _EditShowScreenState extends State<EditShowScreen> {
                   } else {
                     widget.show.comments = _commentsTextController.value.text.trim();
                   }
+                  widget.show.save();
                 });
               }, 
               child: Text(

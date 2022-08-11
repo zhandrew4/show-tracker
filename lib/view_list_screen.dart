@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'list_items.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'show.dart';
+import 'show_list.dart';
 
 import 'new_show_screen.dart';
 import 'view_show_screen.dart';
@@ -14,6 +16,8 @@ class ViewListScreen extends StatefulWidget {
 }
 
 class _ViewListScreenState extends State<ViewListScreen> {  
+  var showBox = Hive.box<Show>("shows");
+
   @override 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +45,8 @@ class _ViewListScreenState extends State<ViewListScreen> {
               icon: const Icon(Icons.delete),
               onPressed: () {
                 setState(() {
-                  widget.showList.removeShow(i);
+                  widget.showList.shows[i].delete();
+                  widget.showList.save();
                 });
               },
               tooltip: "Delete Show",
@@ -63,14 +68,16 @@ class _ViewListScreenState extends State<ViewListScreen> {
   Future<void> _navigateAndAddShow(BuildContext context) async {
     final newShow = await Navigator.push(
       context, 
-      MaterialPageRoute(builder: (context) => const NewShowScreen(title: "Add Show"))
+      MaterialPageRoute(builder: (context) => const NewShowScreen())
     );
 
     if (!mounted) return;
 
     if(newShow != null) {
       setState(() {
-        widget.showList.addShow(newShow);
+        showBox.add(newShow);
+        widget.showList.shows.add(newShow);
+        widget.showList.save();
       });
     }
   }
