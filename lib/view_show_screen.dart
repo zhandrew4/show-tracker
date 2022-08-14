@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'list_items.dart';
+import 'show.dart';
 import 'edit_show_screen.dart';
 
 class ViewShowScreen extends StatefulWidget {
@@ -29,7 +29,7 @@ class _ViewShowScreenState extends State<ViewShowScreen> {
                 MaterialPageRoute(
                   builder: (context) => EditShowScreen(show: widget.show),
                 ),
-              ).then((value) => setState(() => {}));
+              ).then((value) => setState(() => {widget.show.save()}));
             },
             tooltip: "Edit",
           )
